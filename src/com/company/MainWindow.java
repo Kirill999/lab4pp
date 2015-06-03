@@ -18,9 +18,9 @@ public class MainWindow extends JFrame {
     private JTextArea mTextArea;
     private JTextField mSearchField;
     private Finder mFinder;
-
+    //Sergey doing something
     public MainWindow() {
-        setTitle("Справочник по странам");
+        setTitle("Справочник");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         JPanel listPanel = new JPanel();
