@@ -13,7 +13,7 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 //Kiril Commentit kod
 public class MainWindow extends JFrame {
-
+// -=MERGED=-
     private JList mList;
     private JTextArea mTextArea;
     private JTextField mSearchField;
