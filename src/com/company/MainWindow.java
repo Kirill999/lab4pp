@@ -11,7 +11,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
-
+//Kiril Commentit kod
 public class MainWindow extends JFrame {
 
     private JList mList;
