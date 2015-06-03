@@ -29,14 +29,10 @@ public class MainWindow extends JFrame {
         JPanel descriptionPanel = new JPanel();
         descriptionPanel.setLayout(new BorderLayout());
 
-        JButton button = new JButton("о нас");
-        JButton button1 = new JButton("контакты");
 
 
         JPanel Panel = new JPanel();
         //Panel.setPreferredSize(new Dimension(200, 50));
-        Panel.add(button);
-        Panel.add(button1);
 
         mFinder = new Finder("out/production/CountryCatalog/ru/miet34/countries");
 
