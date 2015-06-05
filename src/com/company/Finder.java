@@ -1,14 +1,12 @@
 package com.company;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Finder {
-//And here too
+    //And here too
     private String mPath;
 
     public Finder(String pathToCountryDir) {
@@ -28,28 +26,58 @@ public class Finder {
     public String[] makeCountryList(String searchWord) {
         File folder = new File(mPath);
         File[] listOfFiles = folder.listFiles();
-        ArrayList<String> countryNames = new ArrayList<String>(listOfFiles.length);
-
-        for (int i = 0; i < listOfFiles.length; i++) {
-            if (listOfFiles[i].isFile() &&
-                    isMatchPattern(listOfFiles[i].getName().toLowerCase(), searchWord.toLowerCase())) {
-                countryNames.add(listOfFiles[i].getName());
+        ArrayList<String> countryNames;
+        try{
+           countryNames = new ArrayList<String>(listOfFiles.length);
+            for (int i = 0; i < listOfFiles.length; i++) {
+                if (listOfFiles[i].isFile() &&
+                        isMatchPattern(listOfFiles[i].getName().toLowerCase(), searchWord.toLowerCase())) {
+                    countryNames.add(listOfFiles[i].getName());
+                }
             }
         }
+        catch (NullPointerException e){
+            System.out.println(e.getMessage());
+            countryNames = new ArrayList<String>();
+            countryNames.add("Error");
+        }
+
+
         return countryNames.toArray(new String[countryNames.size()]);
     }
 
     public String[] makeCountryList() {
         File folder = new File(mPath);
         File[] listOfFiles = folder.listFiles();
-        ArrayList<String> countryNames = new ArrayList<String>(listOfFiles.length);
-
-        for (int i = 0; i < listOfFiles.length; i++) {
-            if (listOfFiles[i].isFile()) {
-                countryNames.add(listOfFiles[i].getName());
+        ArrayList<String> countryNames;
+        try{
+            countryNames = new ArrayList<String>(listOfFiles.length);
+            for (int i = 0; i < listOfFiles.length; i++) {
+                if (listOfFiles[i].isFile()) {
+                    countryNames.add(listOfFiles[i].getName());
+                }
             }
         }
+        catch (NullPointerException e){
+            System.out.println(e.getMessage());
+            countryNames = new ArrayList<String>();
+            countryNames.add("Error");
+        }
+
+
         return countryNames.toArray(new String[countryNames.size()]);
+    }
+    static public String readTextFromInputStream(InputStream in) throws IOException {
+        StringBuilder text = new StringBuilder();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(in,"windows-1251"));
+        String line = null;
+        String newline = System.getProperty("line.separator");
+        while ((line = reader.readLine())!=null){
+            text.append(line);
+            text.append(newline);
+        }
+        reader.close();
+        return text.toString();
     }
 
     public String getDescription(String name) {
@@ -57,12 +85,8 @@ public class Finder {
         String result = "";
         try
         {
-            BufferedReader in = new BufferedReader(new FileReader(mPath+"/"+name));
-            while ((str = in.readLine()) != null)
-            {
-                result += str;
-            }
-            in.close();
+            FileInputStream stream = new FileInputStream(mPath+"/"+name);
+            result = readTextFromInputStream(stream);
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
