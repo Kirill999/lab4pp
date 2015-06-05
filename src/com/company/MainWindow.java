@@ -114,11 +114,12 @@ public class MainWindow extends JFrame {
 
         //setResizable(false);
         setSize(800, 500);
-        setVisible(true);
+        //setVisible(true);
     }
 
     public static void main(String[] args) {
         MainWindow w = new MainWindow();
+        w.setVisible(true);
     }
 
 }
